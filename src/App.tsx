@@ -1,5 +1,5 @@
 
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -13,19 +13,14 @@ import InventoryEditPage from "./pages/InventoryEditPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
-import { useState } from 'react';
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isOffline, setIsOffline] = useState(false);
-
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+      <BrowserRouter>
+        <TooltipProvider>
           <Routes>
             <Route element={<AppLayout />}>
               <Route path="/" element={<Index />} />
@@ -39,8 +34,10 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+          <ShadcnToaster />
+          <Sonner />
+        </TooltipProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 };

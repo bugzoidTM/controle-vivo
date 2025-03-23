@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Search, Plus, Minus } from 'lucide-react';
+import { Search, Plus, Package } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -70,58 +69,58 @@ const ProductList: React.FC<ProductListProps> = ({ products, onAddProduct }) => 
           ))}
         </div>
         
-        <ScrollArea className="flex-1 -mx-4 px-4">
-          {filteredProducts.length === 0 ? (
-            <div className="text-center py-10 text-muted-foreground">
-              Nenhum produto encontrado
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {filteredProducts.map((product) => (
-                <div key={product.id}>
-                  <div className="flex gap-3 py-2">
-                    <div className="w-12 h-12 bg-secondary rounded-md flex items-center justify-center overflow-hidden">
-                      {product.image ? (
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <Package size={20} className="text-muted-foreground" />
-                      )}
-                    </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-medium truncate">{product.name}</p>
-                          <p className="text-muted-foreground text-sm">
-                            R$ {product.price.toFixed(2)}
-                          </p>
-                        </div>
-                        <Badge variant="outline" className="ml-2">
-                          {product.stock} unid.
-                        </Badge>
-                      </div>
-                    </div>
-                    
-                    <Button 
-                      size="icon" 
-                      variant="ghost" 
-                      onClick={() => onAddProduct(product)}
-                      disabled={product.stock <= 0}
-                      className="shrink-0"
-                    >
-                      <Plus size={18} />
-                    </Button>
-                  </div>
-                  <Separator />
+    <ScrollArea className="flex-1 -mx-4 px-4">
+      {filteredProducts.length === 0 ? (
+        <div className="text-center py-10 text-muted-foreground">
+          Nenhum produto encontrado
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {filteredProducts.map((product) => (
+            <div key={product.id}>
+              <div className="flex gap-3 py-2">
+                <div className="w-12 h-12 bg-secondary rounded-md flex items-center justify-center overflow-hidden">
+                  {product.image ? (
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Package size={20} className="text-muted-foreground" />
+                  )}
                 </div>
-              ))}
+                
+                <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="font-medium truncate">{product.name}</p>
+                      <p className="text-muted-foreground text-sm">
+                        R$ {product.price.toFixed(2)}
+                      </p>
+                    </div>
+                    <Badge variant="outline" className="ml-2">
+                      {product.stock} unid.
+                    </Badge>
+                  </div>
+                </div>
+                
+                <Button 
+                  size="icon" 
+                  variant="ghost" 
+                  onClick={() => onAddProduct(product)}
+                  disabled={product.stock <= 0}
+                  className="shrink-0"
+                >
+                  <Plus size={18} />
+                </Button>
+              </div>
+              <Separator />
             </div>
-          )}
-        </ScrollArea>
+          ))}
+        </div>
+      )}
+    </ScrollArea>
       </CardContent>
     </Card>
   );
